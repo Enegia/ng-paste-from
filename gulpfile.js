@@ -2,6 +2,7 @@
 
 var gulp = require("gulp");
 var r = require("gulp-load-plugins")();
+var ngAnnotate = require('gulp-ng-annotate');
 
 var src = {
 	js: "src/*.coffee"
@@ -22,6 +23,7 @@ gulp.task("js", function() {
 	return gulp.src(src.js)
 			.pipe(r.sourcemaps.init())
 			.pipe(r.coffee())
+			.pipe(ngAnnotate())
 			.pipe(r.rename({suffix: "-latest"}))
 			.pipe(r.sourcemaps.write("./"))
 			.pipe(gulp.dest(dest));
@@ -31,6 +33,7 @@ gulp.task("js-min", function() {
 	return gulp.src(src.js)
 			.pipe(r.sourcemaps.init())
 			.pipe(r.coffee())
+			.pipe(ngAnnotate())
 			// Mangle will shorten variable names which breaks the AngularJS dependency injection.
 			// TODO: Use a build tool to preserve the important variables instead of disabling mangle.
 			.pipe(r.uglify({mangle: false}))

@@ -58,7 +58,7 @@
         element.on("keyup", $scope.changeEvent);
         return element.on("change", $scope.changeEvent);
       },
-      controller: function($scope, $filter, ngPasteFromErrors, ngPasteFromSeparators) {
+      controller: ["$scope", "$filter", "ngPasteFromErrors", "ngPasteFromSeparators", function($scope, $filter, ngPasteFromErrors, ngPasteFromSeparators) {
         $scope.columnsToObject = function(columns) {
           var column, format, i, index, len, obj;
           obj = {};
@@ -123,7 +123,7 @@
             return $scope.ngPasteFrom = result;
           });
         };
-      }
+      }]
     };
   });
 
